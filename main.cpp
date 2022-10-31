@@ -8,7 +8,10 @@ public:
         std::cout << "Constructor initializare joc\n";
     }
     //operator<<
-    friend std::ostream& operator<<(std::ostream &, const Sudoku &);
+    friend std::ostream& operator<<(std::ostream & os, const Sudoku & s) {
+        os << "sudoku";
+        return os;
+    };
 };
 
 class Player {
@@ -17,9 +20,7 @@ private:
     std::string nume;
 public:
     //constructor
-    Player(int number1, const std::string nume1) {
-        number = number1;
-        nume = nume1;
+    Player(int number_, const std::string& nume_) : number{number_}, nume{nume_} {
         std::cout << "Constructor initializare jucator\n";
     }
     int GetNumber() {
@@ -36,7 +37,10 @@ public:
         std::cout << "\n";
     }
     //operator<<
-    friend std::ostream& operator<<(std::ostream &, const Player &);
+    friend std::ostream& operator<<(std::ostream & os, const Player& p) {
+        os << "Player" << p.number << " " << p.nume << "\n";
+        return os;
+    };
 
 };
 
@@ -44,46 +48,62 @@ class Grid {
     int **grid, row, col;
 public:
     //constructor
-    Grid (const int r = 9, const int c = 9) {
-        row = r;
-        col = c;
+    Grid (const int r, const int c) : row{r}, col{c} {
         grid = new int*[row];
-        for (int i = 1; i <= r; ++i) {
-            grid[i] = new int[9];
-            for (int j = 1; j <= c; ++j) {
+        for (int i = 0; i < row; ++i) {
+            grid[i] = new int[col];
+            for (int j = 0; j < col; ++j) {
                 grid[i][j] = 0;
             }
         }
         std::cout << "Constructor de initializare grid\n";
     }
     //constructor de copiere
-    Grid (Grid& g) {
+    Grid (const Grid& other) : row{other.row}, col{other.col} {
 
-        for (int i = 1; i <= row; ++i) {
-            for (int j = 1; j <= col; ++j) {
-                grid[i][j] = g.grid[i][j];
+        for (int i = 0; i < row; ++i) {
+            for (int j = 0; j < col; ++j) {
+                grid[i][j] = other.grid[i][j];
             }
         }
     }
     void citire() {
-        for (int i = 1; i <= row; ++i) {
-            for (int j = 1; j <= col; ++j) {
+        for (int i = 0; i < row; ++i) {
+            for (int j = 0; j < col; ++j) {
                 std::cin >> grid[i][j];
             }
         }
     }
     void scrie() {
-        for (int i = 1; i <= row; ++i) {
-            for (int j = 1; j <= col; ++j) {
+        for (int i = 0; i < row; ++i) {
+            for (int j = 0; j < col; ++j) {
                 std::cout << grid[i][j] << " ";
             }
             std::cout << "\n";
         }
     }
     //operator=
-    Grid& operator=(const Grid& grid1);
+    Grid& operator=(const Grid& other) {
+    row = other.row;
+    col = other.col;
+    for (int i = 0; i < row; ++i) {
+        for (int j = 0; j < col; ++j) {
+            grid[i][j] = other.grid[i][j];
+        }
+    }
+    std::cout << "operator= copiere\n";
+    return *this;
+    }
     //operator<<
-    friend std::ostream& operator<<(std::ostream &, const Grid &);
+    friend std::ostream& operator<<(std::ostream & os, const Grid& g) {
+        os << "Grid" << g.row << " " << g.col << "\n";
+        for (int i = 0; i < g.row; ++i) {
+            for (int j = 0; j < g.col; ++j) {
+                os << g.grid[i][j];
+            }
+        }
+        return os;
+    };
     //destructor
     ~Grid() {
         delete [] grid;
@@ -91,27 +111,11 @@ public:
     }
 };
 
-Grid& Grid::operator=(const Grid & grid1) {
-    if (this == &grid1) {
-        return *this;
-    }
-    grid = new int*[row];
-    for (int i = 1; i <= row; ++i) {
-        grid[i] = new int[9];
-    }
-    for (int i = 1; i <= row; ++i) {
-        for (int j = 1; j <= col; ++j) {
-            grid[i][j] = grid1.grid[i][j];
-        }
-    }
-    return *this;
-}
-
 int main() {
     Sudoku s;
     Player p(1, "Andrei");
     p.scrie();
-    Grid g;
+    Grid g(9, 9);
     g.citire();
     std::cout << "\n";
     g.scrie();
