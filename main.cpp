@@ -116,10 +116,7 @@ public:
     };
     //destructor
     ~Grid() {
-        for (int i = 0; i < col; ++i) {
-            delete grid[i];
-        }
-        delete grid;
+        delete [][] grid;
         std::cout << "Destructor grid";
     }
 };
