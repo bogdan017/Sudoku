@@ -1,5 +1,5 @@
 #include <iostream>
-#include <string>
+#include <array>
 
 class Sudoku {
     int id_game;
@@ -30,6 +30,10 @@ public:
     Player(int number_, const std::string& nume_) : number{number_}, nume{nume_} {
         std::cout << "Constructor initializare jucator\n";
     }
+    //constructor de copiere
+    Player(const Player& other) : number{other.number}, nume{other.nume} {
+        std::cout << "Constructor de copiere student";
+    }
     /*int GetNumber() {
         return number;
     }
@@ -43,94 +47,151 @@ public:
         std::cout << "Numarul jucatorului: " << number << "\n" << "Numele jucatorului: " << nume << "\n";
         std::cout << "\n";
     }
+    //operator=
+    Player& operator=(const Player& other) {
+        number = other.number;
+        nume = other.nume;
+        std::cout << "Op= copiere Player\n";
+        return *this;
+    }
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Player& p) {
         os << "Player" << p.number << " " << p.nume << "\n";
         return os;
     };
-
+    //destructor
+    ~Player() {
+        std::cout << "Destructor player\n";
+    }
 };
 
 class Grid {
-    int **grid{}, row, col;
+    std::array<std::array<int, 9>, 9> grid{};
 public:
-    //constructor
-    Grid (int r, int c) : row{r}, col{c} {
-        grid = new int*[row];
-        for (int i = 0; i < row; ++i) {
-            grid[i] = new int[col];
-            for (int j = 0; j < col; ++j) {
+    Grid() {
+        for (size_t i = 0; i < 9; ++i) {
+            for (size_t j = 0; j < 9; ++j) {
                 grid[i][j] = 0;
             }
         }
         std::cout << "Constructor de initializare grid\n";
     }
-    //constructor de copiere
-    Grid (const Grid& other) : row{other.row}, col{other.col} {
-        grid = new int*[other.row];
-        for (int i = 0; i < other.row; ++i) {
-            grid[i] = new int[other.col];
-            (*grid[i]) = *(other.grid[i]);
+    void initializeGrid() {
+        char ch = 'y';
+        int r, c, val;
+        while (ch == 'y' && r >= 0 && r < 9 && c >= 0 && c < 9) {
+          //  int r, c, var;
+            std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: ";
+            std::cin >> r;
+            std::cin >> c;
+            std::cin >> val;
+            grid[r][c] = val;
+            std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: ";
+            std::cin >> ch;
         }
     }
-    void citire() {
-        for (int i = 0; i < row; ++i) {
-            for (int j = 0; j < col; ++j) {
-                std::cin >> grid[i][j];
+    int NumInRow(int r, int num) {
+        for (int i = 0; i < 9; ++i) {
+            if (num != 0 && grid[r][i] == num) {
+                return 1;
             }
         }
+        return 0;
     }
+    int NumInCol(int c, int num) {
+        for (int i = 0; i < 9; ++i) {
+            if (num != 0 && grid[i][c] == num) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+    int NumInSquare(int ls, int cs, int num) {
+        for (int i = 0; i < 3; ++i) {
+            for (int j = 0; j < 3; ++j) {
+                if (grid[i + ls][j + cs] == num) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+    int findEmpty(int &r, int &c) {
+        for (r = 0; r < 9; ++r) {
+            for (c = 0; c < 9; ++c) {
+                if (grid[r][c] == 0) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+    int ok(int r, int c, int num) {
+        if (!NumInRow(r, num)) {
+            if (!NumInCol(c, num)) {
+                int line_sq = r - r % 3;
+                int col_sq = c - c % 3;
+                if (!NumInSquare(line_sq, col_sq, num)) {
+                    return 1;
+                }
+            }
+        }
+        return 0;
+    }
+    int solve() {
+        int r, c;
+        if (findEmpty(r, c)) {
+            for (int num = 1; num <= 9; ++num) {
+                if (ok(r, c, num)) {
+                    grid[r][c] = num;
+                    if (solve()) {
+                        return 1;
+                    }
+                    grid[r][c] = 0;
+                }
+            }
+            return 0;
+        } else return 1;
+    }
+
     void scrie() {
-        for (int i = 0; i < row; ++i) {
-            for (int j = 0; j < col; ++j) {
+        for (int i = 0; i < 9; ++i) {
+            for (int j = 0; j < 9; ++j) {
                 std::cout << grid[i][j] << " ";
             }
             std::cout << "\n";
         }
     }
-    //operator=
-    Grid& operator=(const Grid& other) {
-        if (this == &other) {
-            return *this;
-        }
-        row = other.row;
-        col = other.col;
-        for (int i = 0; i < row; ++i) {
-            for (int j = 0; j < col; ++j) {
-                grid[i][j] = other.grid[i][j];
-            }
-        }
-        std::cout << "operator= copiere\n";
-        return *this;
-    }
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Grid& g) {
-        os << "Grid" << g.row << " " << g.col << "\n";
-        for (int i = 0; i < g.row; ++i) {
-            for (int j = 0; j < g.col; ++j) {
+        for (int i = 0; i < 9; ++i) {
+            for (int j = 0; j < 9; ++j) {
                 os << g.grid[i][j];
             }
         }
         return os;
     };
-    //destructor
-    ~Grid() {
-        for (int i = 0; i < row; ++i) {
-            delete[] grid[i];
-        }
-        delete[] grid;
-        std::cout << "Destructor grid";
-    }
 };
 
 int main() {
     Sudoku s(1);
     s.scrie();
-    Player p(1,"Andrei");
+    Player p(1,"Andrei"), p1(2, "Stefan");
     p.scrie();
-    Grid g(2, 2);
-    g.citire();
+    p1.scrie();
+    p = p1;
+    p.scrie();
+    p1.scrie();
+    Grid g;
     std::cout << "\n";
     g.scrie();
+    g.initializeGrid();
+    g.scrie();
+    std::cout << "Rezolvare sudoku: \n";
+    if (g.solve()) {
+        g.scrie();
+    } else {
+        std::cout << "Sudoku nu poate fi rezolvat\n";
+    }
     return 0;
 }
