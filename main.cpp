@@ -77,17 +77,24 @@ public:
         std::cout << "Constructor de initializare grid\n";
     }
     void initializeGrid() {
-        char ch = 'y';
         int r, c, val;
-        while (ch == 'y' && r >= 0 && r < 9 && c >= 0 && c < 9) {
-          //  int r, c, var;
-            std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: ";
-            std::cin >> r;
-            std::cin >> c;
-            std::cin >> val;
+        std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+        std::cin >> r >> c >> val;
+        if ((r < 0 || r > 8) && (c < 0 || c > 8)) {
+            std::cout << "Valoarea introdusa se afla in afara gridului\n";
+            return;
+        } else {
             grid[r][c] = val;
-            std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: ";
-            std::cin >> ch;
+            char ch = 'y';
+            while (ch == 'y') {
+                std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+                std::cin >> r;
+                std::cin >> c;
+                std::cin >> val;
+                grid[r][c] = val;
+                std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
+                std::cin >> ch;
+            }
         }
     }
     int NumInRow(int r, int num) {
@@ -151,12 +158,14 @@ public:
                 }
             }
             return 0;
-        } else return 1;
+        } else {
+            return 1;
+        }
     }
 
     void scrie() {
-        for (int i = 0; i < 9; ++i) {
-            for (int j = 0; j < 9; ++j) {
+        for (size_t i = 0; i < 9; ++i) {
+            for (size_t j = 0; j < 9; ++j) {
                 std::cout << grid[i][j] << " ";
             }
             std::cout << "\n";
