@@ -78,10 +78,10 @@ public:
     }
     void initializeGrid() {
         int r, c, val;
-        std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+        std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese initial: \n";
         std::cin >> r >> c >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8)) {
-            std::cout << "Valoarea introdusa se afla in afara gridului\n";
+        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
+            std::cout << "Valoarea introdusa se afla in afara gridului si nu este valida\n";
             return;
         } else {
             grid[r][c] = val;
@@ -173,8 +173,8 @@ public:
     }
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Grid& g) {
-        for (int i = 0; i < 9; ++i) {
-            for (int j = 0; j < 9; ++j) {
+        for (size_t i = 0; i < 9; ++i) {
+            for (size_t j = 0; j < 9; ++j) {
                 os << g.grid[i][j];
             }
         }
