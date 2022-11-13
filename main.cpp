@@ -50,10 +50,10 @@ public:
         std::cout << "Constructor de initializare grid\n";
     }
     void initializeGrid() {
-        int r, c, val;
         char ch = 'y';
         while (ch == 'y') {
             std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+            int r, c, val;
             std::cin >> r;
             std::cin >> c;
             std::cin >> val;
