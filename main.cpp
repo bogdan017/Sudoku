@@ -14,18 +14,11 @@ public:
     Player(const Player& other) : number{other.number}, nume{other.nume} {
         std::cout << "Constructor de copiere student\n";
     }
-    /*int GetNumber() {
+    int GetNumber() const {
         return number;
     }
-    std::string GetNume() {
+    std::string GetNume() const {
         return nume;
-    }
-    void SetNume(const std::string& nume1) {
-        nume = nume1;
-    }*/
-    void scrie() {
-        std::cout << "Numarul jucatorului: " << number << "\n" << "Numele jucatorului: " << nume << "\n";
-        std::cout << "\n";
     }
     //operator=
     Player& operator=(const Player& other) {
@@ -142,21 +135,13 @@ public:
             return 1;
         }
     }
-
-    void scrie() {
-        for (size_t i = 0; i < 9; ++i) {
-            for (size_t j = 0; j < 9; ++j) {
-                std::cout << grid[i][j] << " ";
-            }
-            std::cout << "\n";
-        }
-    }
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Grid& g) {
         for (size_t i = 0; i < 9; ++i) {
             for (size_t j = 0; j < 9; ++j) {
-                os << g.grid[i][j];
+                os << g.grid[i][j] << " ";
             }
+            os << "\n";
         }
         return os;
     };
@@ -176,7 +161,7 @@ public:
     }*/
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Sudoku& s) {
-        os << "sudoku " << s.id_game << "\n";
+        os << "sudoku game no." << s.id_game << "\n" << "Numarul jucatorului: " << s.player1.GetNumber() << "\n" << "Numele jucatorului: " << s.player1.GetNume() << "\n" << s.grid1;
         return os;
     };
 };
@@ -184,21 +169,19 @@ public:
 int main() {
     Player p(1,"Andrei"), p1(2, "Stefan");
     std::cout << p << '\n' << p1 << '\n';
-    p1.scrie();
-    p = p1;
-    p.scrie();
-    p1.scrie();
+    std::cout << p << '\n';
+    std::cout << p1 << '\n';
     Grid g;
-    std::cout << "\n";
-    g.scrie();
+    std::cout << "\n" << g << "\n";
     g.initializeGrid();
-    g.scrie();
+    std::cout << g << "\n";
     std::cout << "Rezolvare sudoku: \n";
     if (g.solve()) {
-        g.scrie();
+        std::cout << g << "\n";
     } else {
         std::cout << "Sudoku nu poate fi rezolvat\n";
     }
     Sudoku s(1,p,g);
+    std::cout << s << "\n";
     return 0;
 }
