@@ -59,7 +59,7 @@ public:
             std::cin >> val;
             if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
                 std::cout << "Matricea este invalida\n";
-                return;
+                break;
             } else {
                 grid[r][c] = val;
             }
