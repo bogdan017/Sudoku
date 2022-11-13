@@ -50,7 +50,7 @@ public:
         std::cout << "Constructor de initializare grid\n";
     }
     void initializeGrid() {
-        int r, c, val;
+        int r = 0, c = 0, val = 0;
         std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese initial: \n";
         std::cin >> r >> c >> val;
         if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
