@@ -1,26 +1,6 @@
 #include <iostream>
 #include <array>
 
-class Sudoku {
-    int id_game;
-public:
-    //constructor
-    explicit Sudoku(int id_game_) : id_game{id_game_} {
-        std::cout << "Constructor initializare joc\n";
-    }
-    void scrie() const {
-        std::cout << "Id joc: " << id_game << "\n";
-    }
-    /*int GetId() const {
-        return id_game;
-    }*/
-    //operator<<
-    friend std::ostream& operator<<(std::ostream & os, const Sudoku& s) {
-        os << "sudoku " << s.id_game << "\n";
-        return os;
-    };
-};
-
 class Player {
 private:
     int number;
@@ -32,7 +12,7 @@ public:
     }
     //constructor de copiere
     Player(const Player& other) : number{other.number}, nume{other.nume} {
-        std::cout << "Constructor de copiere student";
+        std::cout << "Constructor de copiere student\n";
     }
     /*int GetNumber() {
         return number;
@@ -182,11 +162,28 @@ public:
     };
 };
 
+class Sudoku {
+    int id_game;
+    Player player1;
+    Grid grid1;
+public:
+    //constructor
+    explicit Sudoku(int id_game_, const Player& player1_, const Grid& grid1_) : id_game{id_game_}, player1{player1_}, grid1{grid1_} {
+        std::cout << "Constructor initializare joc\n";
+    }
+    /*int GetId() const {
+        return id_game;
+    }*/
+    //operator<<
+    friend std::ostream& operator<<(std::ostream & os, const Sudoku& s) {
+        os << "sudoku " << s.id_game << "\n";
+        return os;
+    };
+};
+
 int main() {
-    Sudoku s(1);
-    s.scrie();
     Player p(1,"Andrei"), p1(2, "Stefan");
-    p.scrie();
+    std::cout << p << '\n' << p1 << '\n';
     p1.scrie();
     p = p1;
     p.scrie();
@@ -202,5 +199,6 @@ int main() {
     } else {
         std::cout << "Sudoku nu poate fi rezolvat\n";
     }
+    Sudoku s(1,p,g);
     return 0;
 }
