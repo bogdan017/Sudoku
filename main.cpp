@@ -50,24 +50,21 @@ public:
         std::cout << "Constructor de initializare grid\n";
     }
     void initializeGrid() {
-        int r = 0, c = 0, val = 0;
-        std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese initial: \n";
-        std::cin >> r >> c >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
-            std::cout << "Valoarea introdusa se afla in afara gridului si nu este valida\n";
-            return;
-        } else {
-            grid[r][c] = val;
-            char ch = 'y';
-            while (ch == 'y') {
-                std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
-                std::cin >> r;
-                std::cin >> c;
-                std::cin >> val;
+        int r, c, val;
+        char ch = 'y';
+        while (ch == 'y') {
+            std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+            std::cin >> r;
+            std::cin >> c;
+            std::cin >> val;
+            if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
+                std::cout << "Matricea este invalida\n";
+                return;
+            } else {
                 grid[r][c] = val;
-                std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
-                std::cin >> ch;
             }
+            std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
+            std::cin >> ch;
         }
     }
     int NumInRow(int r, int num) {
