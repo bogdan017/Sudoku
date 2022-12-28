@@ -6,6 +6,7 @@
 #define MAIN_CPP_SUDOKU_H
 #include "Grid.h"
 #include "Player.h"
+#include <memory>
 
 
 class Sudoku {
