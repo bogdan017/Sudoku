@@ -6,6 +6,7 @@
 #define MAIN_CPP_GRID_H
 #include <iostream>
 #include <array>
+#include <memory>
 
 class Grid {
 /*public:
