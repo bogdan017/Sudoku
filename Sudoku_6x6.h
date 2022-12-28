@@ -5,6 +5,7 @@
 #ifndef MAIN_CPP_SUDOKU_6X6_H
 #define MAIN_CPP_SUDOKU_6X6_H
 #include "Grid.h"
+#include <memory>
 
 class Sudoku_6x6 : public Grid {
 public:
