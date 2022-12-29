@@ -137,13 +137,11 @@ public:
 
     friend std::ostream& operator<<(std::ostream & os, const Grid& g);
 
-    virtual void initializeGrid_() = 0;
-
 protected:
     Grid(const Grid &other) = default;
     Grid &operator=(const Grid &other) = default;
     std::array<std::array<int, 9>, 9> grid;
-    //void initializeGrid_() {};
+
 private:
     virtual int NumInRow_(int r_, int num_) const = 0;
     virtual int NumInCol_(int c_, int num_) const = 0;

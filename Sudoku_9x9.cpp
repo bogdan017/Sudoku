@@ -4,6 +4,8 @@
 
 #include "Sudoku_9x9.h"
 
+std::shared_ptr<Grid> Sudoku_9x9::clone() const { return std::make_shared<Sudoku_9x9>(*this); }
+
 void Sudoku_9x9::initializeGrid_() {
     int r, c, val;
     char ch = 'y';
@@ -12,7 +14,7 @@ void Sudoku_9x9::initializeGrid_() {
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
+        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 1 || val > 9)) {
             std::cout << "Matricea este invalida\n";
             break;
         } else {
@@ -103,4 +105,6 @@ int Sudoku_9x9::solve_() {
     }
 }
 
-std::shared_ptr<Grid> Sudoku_9x9::clone() const { return std::make_shared<Sudoku_9x9>(*this); }
+
+
+

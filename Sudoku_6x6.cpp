@@ -4,7 +4,10 @@
 
 #include "Sudoku_6x6.h"
 
-void Sudoku_6x6::initializeGrid_() {
+std::shared_ptr<Grid> Sudoku_6x6::clone() const { return std::make_shared<Sudoku_6x6>(*this); }
+
+
+void Sudoku_6x6::initializeGrid() {
     int r, c, val;
     char ch = 'y';
     while (ch == 'y') {
@@ -12,7 +15,7 @@ void Sudoku_6x6::initializeGrid_() {
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
+        if ((r < 0 || r > 5) && (c < 0 || c > 5) && (val < 0 || val > 5)) {
             std::cout << "Matricea este invalida\n";
             break;
         } else {
@@ -103,4 +106,3 @@ int Sudoku_6x6::solve_() {
     }
 }
 
-std::shared_ptr<Grid> Sudoku_6x6::clone() const { return std::make_shared<Sudoku_6x6>(*this); }

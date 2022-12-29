@@ -12,12 +12,8 @@
 #include "Sudoku.h"
 
 int main() {
-    Player p(1,"Andrei"), p1(2, "Stefan");
-    //std::cout << p << '\n' << p1 << '\n';
-    //std::cout << p << '\n';
-    std::cout << p1 << '\n';
-    //Grid *g = new Sudoku_9x9();
-    Sudoku_9x9 g;
+
+    /*Sudoku_9x9 g;
     g.initializeGrid_();
     std::cout << "Sudoku initial:" << "\n" << g << "\n\n\n\n";
     std::cout << "Rezolvare sudoku: \n";
@@ -26,8 +22,21 @@ int main() {
     } else {
         std::cout << "Sudoku nu poate fi rezolvat\n";
     }
-    //Sudoku s(1, p, std::shared_ptr<Grid>());
-    //std::cout << s << "\n";
+    Sudoku_6x6 h;
+    h.initializeGrid_();
+    std::cout << "Sudoku initial:" << "\n" << h << "\n\n\n\n";
+    std::cout << "Rezolvare sudoku: \n";
+    if (h.solve()) {
+        std::cout<< h <<"\n\n\n\n";
+    } else {
+        std::cout << "Sudoku nu poate fi rezolvat\n";
+    }*/
+    Sudoku_9x9 g;
+    g.initializeGrid_();
+    Player p1{1, "Andrei",{}};
+    p1.adauga_grid(g);
+    g.solve();
+    std::cout << p1;
     return 0;
 }
 

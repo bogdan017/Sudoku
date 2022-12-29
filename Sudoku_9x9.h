@@ -9,7 +9,7 @@
 
 class Sudoku_9x9 : public Grid {
 public:
-    void initializeGrid_() override;
+    void initializeGrid_();
     void afisare(std::ostream &os) override;
     std::shared_ptr<Grid> clone() const override;
 private:

@@ -9,8 +9,7 @@
 
 class Sudoku_6x6 : public Grid {
 public:
-    // explicit Sudoku_9x9(const std::array<std::array<int, 9>, 9> &grid) : Grid(grid) {}
-    void initializeGrid_() override;
+    void initializeGrid();
     void afisare(std::ostream &os) override;
     std::shared_ptr<Grid> clone() const override;
 private:

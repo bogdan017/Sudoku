@@ -11,18 +11,14 @@
 
 class Sudoku {
     int id_game;
-    Player player1;
-    std::vector<std::shared_ptr<Grid>> g;
+    std::vector<Player> players;
 public:
     //constructor
-    explicit Sudoku(int id_game_, const Player &player1_, std::vector<std::shared_ptr<Grid>> g);
+    explicit Sudoku(int id_game_);
     /*int GetId() const {
         return id_game;
     }*/
-    Sudoku(std::vector<std::shared_ptr<Grid>> g, Player player1);
-    Sudoku(const Sudoku &other, Player player1);
-    Sudoku &operator=(Sudoku other);
-    friend void swap(Sudoku &st1, Sudoku &st2);
+    void adauga(const Player &p);
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Sudoku &s);
 };
