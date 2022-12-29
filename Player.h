@@ -10,7 +10,7 @@ class Player {
 private:
     int number;
     std::string nume;
-    std::vector<std::shared_ptr<Grid>> (g);
+    std::vector<std::shared_ptr<Grid>> g;
 public:
     //constructor
     Player(int number_, const std::string& nume_, std::vector<std::shared_ptr<Grid>> g);
