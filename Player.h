@@ -14,7 +14,7 @@ private:
 public:
     //constructor
     Player(int number_, const std::string& nume_, std::vector<std::shared_ptr<Grid>> g);
-    void adauga_grid(Grid &gr);
+    void adauga_grid(const Grid &gr);
     //constructor de copiere
     Player(const Player& other);
     int GetNumber() const;

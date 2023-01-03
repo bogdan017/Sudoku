@@ -126,7 +126,8 @@ class Grid {
 public:
     virtual ~Grid() = default;
     virtual std::shared_ptr<Grid> clone() const = 0;
-    Grid() = default;
+    Grid();
+    Grid(const int lines, const int cols);
     //void initializeGrid() {}
     int NumInRow(int r, int num) const;
     int NumInCol(int c, int num) const;
@@ -141,6 +142,7 @@ protected:
     Grid(const Grid &other) = default;
     Grid &operator=(const Grid &other) = default;
     std::array<std::array<int, 9>, 9> grid;
+    size_t lines, cols;
 
 private:
     virtual int NumInRow_(int r_, int num_) const = 0;

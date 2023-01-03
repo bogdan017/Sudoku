@@ -8,8 +8,11 @@ std::shared_ptr<Grid> Sudoku_6x6::clone() const { return std::make_shared<Sudoku
 
 
 void Sudoku_6x6::initializeGrid() {
+    this->lines = 6;
+    this->cols = 6;
     int r, c, val;
     char ch = 'y';
+    std::cout << "Initializare sudoku 6x6\n";
     while (ch == 'y') {
         std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
         std::cin >> r;

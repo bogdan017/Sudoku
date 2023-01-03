@@ -7,14 +7,22 @@
 std::shared_ptr<Grid> Sudoku_9x9::clone() const { return std::make_shared<Sudoku_9x9>(*this); }
 
 void Sudoku_9x9::initializeGrid_() {
+    this->lines = 9;
+    this->cols = 9;
+    for(size_t i = 0; i < this->lines; i++){
+        for (size_t j = 0; j < this->cols; ++j) {
+            grid[i][j] = 0;
+        }
+    }
     int r, c, val;
     char ch = 'y';
+    std::cout << "Initializare Sudoku 9x9:\n";
     while (ch == 'y') {
         std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 1 || val > 9)) {
+        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
             std::cout << "Matricea este invalida\n";
             break;
         } else {

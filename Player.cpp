@@ -40,13 +40,16 @@ void swap(Player &st1, Player &st2) {
 std::ostream &operator<<(std::ostream &os, const Player &p) {
     os << "Player no." << p.number << "\n" << "Nume player: " <<  p.nume << "\n";
     os << "Jocuri player: " << "\n";
-    for (const auto &Grid: p.g)
+    for (const auto &Grid: p.g){
         os << *Grid;
+        os << "\n";
+    }
     os << "\n";
     os << "Jocuri rezolvate player: " << "\n";
     for (const auto &Grid: p.g) {
         (*Grid).solve();
         os << *Grid;
+        os << "\n";
     }
     os << "\n";
     return os;
@@ -56,8 +59,8 @@ Player::~Player() {
     std::cout << "Destructor player\n";
 }
 
-void Player::adauga_grid(Grid &gr) {
-    g.emplace_back(gr.clone());
+void Player::adauga_grid(const Grid &gr) {
+    g.push_back(gr.clone());
 }
 
 
