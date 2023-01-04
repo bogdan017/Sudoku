@@ -14,10 +14,6 @@ Sudoku::Sudoku(int id_game_): id_game(std::move(id_game_)) {
     std::cout << "Constructor initializare joc\n";
 }
 
-void Sudoku::adauga(const Player &p) {
-    players.emplace_back(p);
-}
-
 std::ostream &operator<<(std::ostream &os, const Sudoku &s) {
     os << "sudoku game no." << s.id_game;
     for (const auto &Player: s.players)

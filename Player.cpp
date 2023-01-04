@@ -11,14 +11,14 @@ Player::Player(const Player &other) : number{other.number}, nume{other.nume} {
     std::cout << "Constructor de copiere jucator\n";
 }
 
-int Player::GetNumber() const {
+/*int Player::GetNumber() const {
     return number;
 }
 
 std::string Player::GetNume() const {
     return nume;
 }
-
+*/
 Player &Player::operator=(const Player &other) {
     number = other.number;
     nume = other.nume;

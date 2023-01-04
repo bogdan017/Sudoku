@@ -4,21 +4,21 @@
 
 #include "Grid.h"
 
-int Grid::NumInRow(int r, int num) const { return NumInRow_(r, num); }
+[[maybe_unused]] int Grid::NumInRow(int r, int num) const { return NumInRow_(r, num); }
 
-int Grid::NumInCol(int c, int num) const { return NumInCol_(c, num); }
+[[maybe_unused]] int Grid::NumInCol(int c, int num) const { return NumInCol_(c, num); }
 
-int Grid::NumInSquare(int ls, int cs, int num) const { return NumInSquare_(ls, cs, num); }
+[[maybe_unused]] int Grid::NumInSquare(int ls, int cs, int num) const { return NumInSquare_(ls, cs, num); }
 
-int Grid::findEmpty(int &r, int &c) const { return findEmpty_(r, c); }
+[[maybe_unused]] int Grid::findEmpty(int &r, int &c) const { return findEmpty_(r, c); }
 
-int Grid::ok(int r, int c, int num) const { return ok_(r, c, num); }
+[[maybe_unused]] int Grid::ok(int r, int c, int num) const { return ok_(r, c, num); }
 
 int Grid::solve() { return solve_(); }
 
 std::ostream &operator<<(std::ostream &os, const Grid &g) {
-    for (size_t i = 0; i < g.lines; ++i) {
-        for (size_t j = 0; j < g.cols; ++j) {
+    for (int i = 0; i < g.lines; ++i) {
+        for (int j = 0; j < g.cols; ++j) {
             os << g.grid[i][j] << " ";
         }
         os << "\n";

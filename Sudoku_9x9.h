@@ -19,8 +19,6 @@ private:
     int findEmpty_(int &r, int &c) const override;
     int ok_(int r_, int c_, int num_) const override;
     int solve_() override;
-
-
 };
 
 

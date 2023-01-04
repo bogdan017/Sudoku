@@ -17,8 +17,8 @@ public:
     void adauga_grid(const Grid &gr);
     //constructor de copiere
     Player(const Player& other);
-    int GetNumber() const;
-    std::string GetNume() const;
+    //int GetNumber() const;
+    //std::string GetNume() const;
     //operator=
     Player& operator=(const Player& other);
     Player &operator=(Player other);

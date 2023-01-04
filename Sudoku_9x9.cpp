@@ -7,10 +7,10 @@
 std::shared_ptr<Grid> Sudoku_9x9::clone() const { return std::make_shared<Sudoku_9x9>(*this); }
 
 void Sudoku_9x9::initializeGrid_() {
-    this->lines = 9;
-    this->cols = 9;
-    for(size_t i = 0; i < this->lines; i++){
-        for (size_t j = 0; j < this->cols; ++j) {
+    lines = 9;
+    cols = 9;
+    for(int i = 0; i < this->lines; i++){
+        for (int j = 0; j < this->cols; ++j) {
             grid[i][j] = 0;
         }
     }
@@ -22,7 +22,7 @@ void Sudoku_9x9::initializeGrid_() {
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 0 || val > 8)) {
+        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 1 || val > 9)) {
             std::cout << "Matricea este invalida\n";
             break;
         } else {

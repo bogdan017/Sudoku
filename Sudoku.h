@@ -18,7 +18,7 @@ public:
     /*int GetId() const {
         return id_game;
     }*/
-    void adauga(const Player &p);
+    //void adauga(const Player &p);
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Sudoku &s);
 };

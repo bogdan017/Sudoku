@@ -129,11 +129,15 @@ public:
     Grid();
     Grid(const int lines, const int cols);
     //void initializeGrid() {}
-    int NumInRow(int r, int num) const;
-    int NumInCol(int c, int num) const;
-    int NumInSquare(int ls, int cs, int num) const;
-    int findEmpty(int &r, int &c) const;
-    int ok(int r, int c, int num) const;
+    [[maybe_unused]] int NumInRow(int r, int num) const;
+
+    [[maybe_unused]] int NumInCol(int c, int num) const;
+
+    [[maybe_unused]] int NumInSquare(int ls, int cs, int num) const;
+
+    [[maybe_unused]] int findEmpty(int &r, int &c) const;
+
+    [[maybe_unused]] int ok(int r, int c, int num) const;
     int solve();
 
     friend std::ostream& operator<<(std::ostream & os, const Grid& g);
@@ -142,7 +146,7 @@ protected:
     Grid(const Grid &other) = default;
     Grid &operator=(const Grid &other) = default;
     std::array<std::array<int, 9>, 9> grid;
-    size_t lines, cols;
+    int lines, cols;
 
 private:
     virtual int NumInRow_(int r_, int num_) const = 0;

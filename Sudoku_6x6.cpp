@@ -8,8 +8,11 @@ std::shared_ptr<Grid> Sudoku_6x6::clone() const { return std::make_shared<Sudoku
 
 
 void Sudoku_6x6::initializeGrid() {
-    this->lines = 6;
-    this->cols = 6;
+    for(int i = 0; i < lines; i++){
+        for (int j = 0; j < cols; ++j) {
+            grid[i][j] = 0;
+        }
+    }
     int r, c, val;
     char ch = 'y';
     std::cout << "Initializare sudoku 6x6\n";
@@ -18,7 +21,7 @@ void Sudoku_6x6::initializeGrid() {
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 5) && (c < 0 || c > 5) && (val < 0 || val > 5)) {
+        if ((r < 0 || r > 5) && (c < 0 || c > 5) && (val < 1 || val > 6)) {
             std::cout << "Matricea este invalida\n";
             break;
         } else {
@@ -30,8 +33,8 @@ void Sudoku_6x6::initializeGrid() {
 }
 
 void Sudoku_6x6::afisare(std::ostream &os) {
-    for (size_t i = 0; i < 6; ++i) {
-        for (size_t j = 0; j < 6; ++j) {
+    for (int i = 0; i < lines; ++i) {
+        for (int j = 0; j < cols; ++j) {
             os << grid[i][j] << " ";
         }
         os << "\n";
@@ -39,7 +42,7 @@ void Sudoku_6x6::afisare(std::ostream &os) {
 }
 
 int Sudoku_6x6::NumInRow_(int r_, int num_) const {
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < lines; ++i) {
         if (num_ != 0 && grid[r_][i] == num_) {
             return 1;
         }
@@ -48,7 +51,7 @@ int Sudoku_6x6::NumInRow_(int r_, int num_) const {
 }
 
 int Sudoku_6x6::NumInCol_(int c_, int num_) const {
-    for (int i = 0; i < 6; ++i) {
+    for (int i = 0; i < cols; ++i) {
         if (num_ != 0 && grid[i][c_] == num_) {
             return 1;
         }
@@ -68,8 +71,8 @@ int Sudoku_6x6::NumInSquare_(int ls_, int cs_, int num_) const {
 }
 
 int Sudoku_6x6::findEmpty_(int &r, int &c) const {
-    for (r = 0; r < 6; ++r) {
-        for (c = 0; c < 6; ++c) {
+    for (r = 0; r < lines; ++r) {
+        for (c = 0; c < cols; ++c) {
             if (grid[r][c] == 0) {
                 return 1;
             }
@@ -107,5 +110,10 @@ int Sudoku_6x6::solve_() {
     } else {
         return 1;
     }
+}
+
+Sudoku_6x6::Sudoku_6x6() {
+    lines = 6;
+    cols = 6;
 }
 
