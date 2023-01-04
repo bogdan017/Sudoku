@@ -1,13 +1,9 @@
-//
-// Created by Vlad Bogdan on 29.12.2022.
-//
-
 #include "Sudoku_6x6.h"
 
-std::shared_ptr<Grid> Sudoku_6x6::clone() const { return std::make_shared<Sudoku_6x6>(*this); }
+std::shared_ptr<Grid> Grid_6x6::clone() const { return std::make_shared<Grid_6x6>(*this); }
 
 
-void Sudoku_6x6::initializeGrid() {
+void Grid_6x6::initializeGrid() {
     for(int i = 0; i < lines; i++){
         for (int j = 0; j < cols; ++j) {
             grid[i][j] = 0;
@@ -21,9 +17,12 @@ void Sudoku_6x6::initializeGrid() {
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 5) && (c < 0 || c > 5) && (val < 1 || val > 6)) {
-            std::cout << "Matricea este invalida\n";
-            break;
+        if (r < 0 || r > 5) {
+            throw(eroare_sudoku(r, c, val));
+        } else if (c < 0 || c > 5) {
+            throw(eroare_sudoku(r, c, val));
+        } else if (val < 1 || val > 6) {
+            throw(eroare_sudoku(r, c, val));
         } else {
             grid[r][c] = val;
         }
@@ -33,7 +32,7 @@ void Sudoku_6x6::initializeGrid() {
 }
 
 
-int Sudoku_6x6::NumInRow_(int r_, int num_) const {
+int Grid_6x6::NumInRow_(int r_, int num_) const {
     for (int i = 0; i < lines; ++i) {
         if (num_ != 0 && grid[r_][i] == num_) {
             return 1;
@@ -42,7 +41,7 @@ int Sudoku_6x6::NumInRow_(int r_, int num_) const {
     return 0;
 }
 
-int Sudoku_6x6::NumInCol_(int c_, int num_) const {
+int Grid_6x6::NumInCol_(int c_, int num_) const {
     for (int i = 0; i < cols; ++i) {
         if (num_ != 0 && grid[i][c_] == num_) {
             return 1;
@@ -51,7 +50,7 @@ int Sudoku_6x6::NumInCol_(int c_, int num_) const {
     return 0;
 }
 
-int Sudoku_6x6::NumInSquare_(int ls_, int cs_, int num_) const {
+int Grid_6x6::NumInSquare_(int ls_, int cs_, int num_) const {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             if (grid[i + ls_][j + cs_] == num_) {
@@ -62,7 +61,7 @@ int Sudoku_6x6::NumInSquare_(int ls_, int cs_, int num_) const {
     return 0;
 }
 
-int Sudoku_6x6::findEmpty_(int &r, int &c) const {
+int Grid_6x6::findEmpty_(int &r, int &c) const {
     for (r = 0; r < lines; ++r) {
         for (c = 0; c < cols; ++c) {
             if (grid[r][c] == 0) {
@@ -73,7 +72,7 @@ int Sudoku_6x6::findEmpty_(int &r, int &c) const {
     return 0;
 }
 
-int Sudoku_6x6::ok_(int r_, int c_, int num_) const {
+int Grid_6x6::ok_(int r_, int c_, int num_) const {
     if (!NumInRow_(r_, num_)) {
         if (!NumInCol_(c_, num_)) {
             int line_sq = r_ - r_ % 3;
@@ -86,7 +85,7 @@ int Sudoku_6x6::ok_(int r_, int c_, int num_) const {
     return 0;
 }
 
-int Sudoku_6x6::solve_() {
+int Grid_6x6::solve_() {
     int r, c;
     if (findEmpty_(r, c)) {
         for (int num = 1; num <= 6; ++num) {
@@ -104,7 +103,7 @@ int Sudoku_6x6::solve_() {
     }
 }
 
-Sudoku_6x6::Sudoku_6x6() {
+Grid_6x6::Grid_6x6() {
     lines = 6;
     cols = 6;
 }

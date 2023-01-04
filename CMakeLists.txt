@@ -41,7 +41,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp Player.cpp Player.h Grid.cpp Grid.h Sudoku_9x9.cpp Sudoku_9x9.h Sudoku_6x6.cpp Sudoku_6x6.h Sudoku.cpp Sudoku.h)
+add_executable(${PROJECT_NAME} main.cpp Player.cpp Player.h Grid.cpp Grid.h Sudoku_9x9.cpp Sudoku_9x9.h Sudoku_6x6.cpp Sudoku_6x6.h Sudoku.cpp Sudoku.h exceptions.cpp exceptions.h)
 
 ###############################################################################
 

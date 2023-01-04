@@ -6,8 +6,9 @@
 #define MAIN_CPP_SUDOKU_9X9_H
 #include "Grid.h"
 #include <memory>
+#include "exceptions.h"
 
-class Sudoku_9x9 : public Grid {
+class Grid_9x9 : public Grid {
 public:
     void initializeGrid_();
     std::shared_ptr<Grid> clone() const override;

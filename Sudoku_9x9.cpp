@@ -1,12 +1,8 @@
-//
-// Created by Vlad Bogdan on 29.12.2022.
-//
-
 #include "Sudoku_9x9.h"
 
-std::shared_ptr<Grid> Sudoku_9x9::clone() const { return std::make_shared<Sudoku_9x9>(*this); }
+std::shared_ptr<Grid> Grid_9x9::clone() const { return std::make_shared<Grid_9x9>(*this); }
 
-void Sudoku_9x9::initializeGrid_() {
+void Grid_9x9::initializeGrid_() {
     lines = 9;
     cols = 9;
     for(int i = 0; i < this->lines; i++){
@@ -22,9 +18,12 @@ void Sudoku_9x9::initializeGrid_() {
         std::cin >> r;
         std::cin >> c;
         std::cin >> val;
-        if ((r < 0 || r > 8) && (c < 0 || c > 8) && (val < 1 || val > 9)) {
-            std::cout << "Matricea este invalida\n";
-            break;
+        if (r < 0 || r > 8) {
+            throw(eroare_sudoku(r, c, val));
+        } else if (c < 0 || c > 8) {
+            throw(eroare_sudoku(r, c, val));
+        } else if (val < 1 || val > 9) {
+            throw(eroare_sudoku(r, c, val));
         } else {
             grid[r][c] = val;
         }
@@ -34,7 +33,7 @@ void Sudoku_9x9::initializeGrid_() {
 }
 
 
-int Sudoku_9x9::NumInRow_(int r_, int num_) const {
+int Grid_9x9::NumInRow_(int r_, int num_) const {
     for (int i = 0; i < 9; ++i) {
         if (num_ != 0 && grid[r_][i] == num_) {
             return 1;
@@ -43,7 +42,7 @@ int Sudoku_9x9::NumInRow_(int r_, int num_) const {
     return 0;
 }
 
-int Sudoku_9x9::NumInCol_(int c_, int num_) const {
+int Grid_9x9::NumInCol_(int c_, int num_) const {
     for (int i = 0; i < 9; ++i) {
         if (num_ != 0 && grid[i][c_] == num_) {
             return 1;
@@ -52,7 +51,7 @@ int Sudoku_9x9::NumInCol_(int c_, int num_) const {
     return 0;
 }
 
-int Sudoku_9x9::NumInSquare_(int ls_, int cs_, int num_) const {
+int Grid_9x9::NumInSquare_(int ls_, int cs_, int num_) const {
     for (int i = 0; i < 3; ++i) {
         for (int j = 0; j < 3; ++j) {
             if (grid[i + ls_][j + cs_] == num_) {
@@ -63,7 +62,7 @@ int Sudoku_9x9::NumInSquare_(int ls_, int cs_, int num_) const {
     return 0;
 }
 
-int Sudoku_9x9::findEmpty_(int &r, int &c) const {
+int Grid_9x9::findEmpty_(int &r, int &c) const {
     for (r = 0; r < 9; ++r) {
         for (c = 0; c < 9; ++c) {
             if (grid[r][c] == 0) {
@@ -74,7 +73,7 @@ int Sudoku_9x9::findEmpty_(int &r, int &c) const {
     return 0;
 }
 
-int Sudoku_9x9::ok_(int r_, int c_, int num_) const {
+int Grid_9x9::ok_(int r_, int c_, int num_) const {
     if (!NumInRow_(r_, num_)) {
         if (!NumInCol_(c_, num_)) {
             int line_sq = r_ - r_ % 3;
@@ -87,7 +86,7 @@ int Sudoku_9x9::ok_(int r_, int c_, int num_) const {
     return 0;
 }
 
-int Sudoku_9x9::solve_() {
+int Grid_9x9::solve_() {
     int r, c;
     if (findEmpty_(r, c)) {
         for (int num = 1; num <= 9; ++num) {

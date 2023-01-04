@@ -1,15 +1,12 @@
-//
-// Created by Vlad Bogdan on 29.12.2022.
-//
-
 #ifndef MAIN_CPP_SUDOKU_6X6_H
 #define MAIN_CPP_SUDOKU_6X6_H
 #include "Grid.h"
 #include <memory>
+#include "exceptions.h"
 
-class Sudoku_6x6 : public Grid {
+class Grid_6x6 : public Grid {
 public:
-    Sudoku_6x6();
+    Grid_6x6();
     void initializeGrid();
     std::shared_ptr<Grid> clone() const override;
 private:

@@ -1,7 +1,3 @@
-//
-// Created by Vlad Bogdan on 29.12.2022.
-//
-
 #include "Grid.h"
 
 int Grid::solve() { return solve_(); }

@@ -31,16 +31,25 @@ int main() {
     } else {
         std::cout << "Sudoku nu poate fi rezolvat\n";
     }*/
-    Sudoku_9x9 g;
-    g.initializeGrid_();
-    Sudoku_6x6 h;
-    h.initializeGrid();
-    Player p1{1, "Andrei",{}};
-    p1.adauga_grid(g);
-    p1.adauga_grid(h);
-    g.solve();
-    h.solve();
-    std::cout << p1;
+    try {
+        Grid_9x9 g;
+        g.initializeGrid_();
+        Grid_6x6 h;
+        h.initializeGrid();
+        Player p1{1, "Andrei", {}};
+        p1.adauga_grid(g);
+        p1.adauga_grid(h);
+        g.solve();
+        h.solve();
+       // std::cout << p1;
+        Sudoku s{-1};
+        s.adaugaJucator(p1);
+        std::cout << s;
+    } catch(eroare_sudoku &err) {
+        std::cout<<err.what()<<std::endl;
+    } catch(eroare_joc &err) {
+        std::cout<<err.what()<<std::endl;
+    }
     return 0;
 }
 
