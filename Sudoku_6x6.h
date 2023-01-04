@@ -11,7 +11,6 @@ class Sudoku_6x6 : public Grid {
 public:
     Sudoku_6x6();
     void initializeGrid();
-    void afisare(std::ostream &os) override;
     std::shared_ptr<Grid> clone() const override;
 private:
     int NumInRow_(int r_, int num_) const override;

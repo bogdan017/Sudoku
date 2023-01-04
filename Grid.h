@@ -130,13 +130,9 @@ public:
     Grid(const int lines, const int cols);
     //void initializeGrid() {}
     int NumInRow(int r, int num) const { return NumInRow_(r, num); };
-
     int NumInCol(int c, int num) const { return NumInCol_(c, num); };
-
     int NumInSquare(int ls, int cs, int num) const { return NumInSquare_(ls, cs, num); };
-
     int findEmpty(int &r, int &c) const { return findEmpty_(r, c); };
-
     int ok(int r, int c, int num) const { return ok_(r, c, num); };
     int solve();
 
@@ -155,7 +151,6 @@ private:
     virtual int findEmpty_(int &r_, int &c) const = 0;
     virtual int ok_(int r_, int c_, int num_) const = 0;
     virtual int solve_() = 0;
-    virtual void afisare(std::ostream &) = 0;
 };
 
 

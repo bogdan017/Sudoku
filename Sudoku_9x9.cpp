@@ -33,14 +33,6 @@ void Sudoku_9x9::initializeGrid_() {
     }
 }
 
-void Sudoku_9x9::afisare(std::ostream &os) {
-    for (size_t i = 0; i < 9; ++i) {
-        for (size_t j = 0; j < 9; ++j) {
-            os << grid[i][j] << " ";
-        }
-        os << "\n";
-    }
-}
 
 int Sudoku_9x9::NumInRow_(int r_, int num_) const {
     for (int i = 0; i < 9; ++i) {

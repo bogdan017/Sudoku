@@ -32,14 +32,6 @@ void Sudoku_6x6::initializeGrid() {
     }
 }
 
-void Sudoku_6x6::afisare(std::ostream &os) {
-    for (int i = 0; i < lines; ++i) {
-        for (int j = 0; j < cols; ++j) {
-            os << grid[i][j] << " ";
-        }
-        os << "\n";
-    }
-}
 
 int Sudoku_6x6::NumInRow_(int r_, int num_) const {
     for (int i = 0; i < lines; ++i) {
