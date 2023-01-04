@@ -129,15 +129,15 @@ public:
     Grid();
     Grid(const int lines, const int cols);
     //void initializeGrid() {}
-    [[maybe_unused]] int NumInRow(int r, int num) const;
+    int NumInRow(int r, int num) const { return NumInRow_(r, num); };
 
-    [[maybe_unused]] int NumInCol(int c, int num) const;
+    int NumInCol(int c, int num) const { return NumInCol_(c, num); };
 
-    [[maybe_unused]] int NumInSquare(int ls, int cs, int num) const;
+    int NumInSquare(int ls, int cs, int num) const { return NumInSquare_(ls, cs, num); };
 
-    [[maybe_unused]] int findEmpty(int &r, int &c) const;
+    int findEmpty(int &r, int &c) const { return findEmpty_(r, c); };
 
-    [[maybe_unused]] int ok(int r, int c, int num) const;
+    int ok(int r, int c, int num) const { return ok_(r, c, num); };
     int solve();
 
     friend std::ostream& operator<<(std::ostream & os, const Grid& g);
