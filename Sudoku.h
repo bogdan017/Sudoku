@@ -14,7 +14,7 @@ class Sudoku {
     std::vector<Player> players;
 public:
     //constructor
-    Sudoku(int id_game_);
+    explicit Sudoku(int id_game_);
     /*int GetId() const {
         return id_game;
     }*/
