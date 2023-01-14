@@ -7,44 +7,51 @@
 #include <string>
 #include "Player.h"
 #include "Grid.h"
-#include "Sudoku_9x9.h"
-#include "Sudoku_6x6.h"
+#include "Grid_9x9.h"
+#include "Grid_6x6.h"
 #include "Sudoku.h"
 
-int main() {
 
-    /*Sudoku_9x9 g;
-    g.initializeGrid_();
-    std::cout << "Sudoku initial:" << "\n" << g << "\n\n\n\n";
-    std::cout << "Rezolvare sudoku: \n";
-    if (g.solve()) {
-        std::cout<< g <<"\n\n\n\n";
+void tipSudoku(Grid* Sudoku_) {
+    auto *co = dynamic_cast<Grid_9x9 *>(Sudoku_);
+    if (co != nullptr) {
+        std::cout << "Sudoku de tip 9x9:";
+        std::cout << "\n";
     } else {
-        std::cout << "Sudoku nu poate fi rezolvat\n";
+        auto *co2 = dynamic_cast<Grid_6x6 *>(Sudoku_);
+        std::cout << "\n";
+        if (co2 != nullptr) {
+            std::cout << "Sudoku de tip 6x6:";
+        }
+        std::cout << "\n";
     }
-    Sudoku_6x6 h;
-    h.initializeGrid_();
-    std::cout << "Sudoku initial:" << "\n" << h << "\n\n\n\n";
-    std::cout << "Rezolvare sudoku: \n";
-    if (h.solve()) {
-        std::cout<< h <<"\n\n\n\n";
-    } else {
-        std::cout << "Sudoku nu poate fi rezolvat\n";
-    }*/
+}
+
+int main() {
     try {
         Grid_9x9 g;
         g.initializeGrid_();
         Grid_6x6 h;
         h.initializeGrid();
-        Player p1{1, "Andrei", {}};
+        Player p1{"Andrei", {}};
+       // Player p2{"George",{}};
+        tipSudoku(&g);
         p1.adauga_grid(g);
+        std::cout << g;
+        tipSudoku(&h);
         p1.adauga_grid(h);
+        std::cout << h;
+        //p2.adauga_grid(g);
+        //std::cout << g;
         g.solve();
         h.solve();
-       // std::cout << p1;
-        Sudoku s{1};
+        //std::cout << p1;
+        Sudoku s;
         s.adaugaJucator(p1);
+        //s1.adaugaJucator(p2);
         std::cout << s;
+        std::cout << "\n";
+        //std::cout << s1;
     } catch(eroare_sudoku &err) {
         std::cout<<err.what()<<std::endl;
     } catch(eroare_joc &err) {

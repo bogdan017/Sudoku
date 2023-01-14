@@ -8,12 +8,13 @@
 
 class Player {
 private:
-    int number;
+    static int idPlayer;
+    const int id_PlayerCur;
     std::string nume;
     std::vector<std::shared_ptr<Grid>> g;
 public:
     //constructor
-    Player(int number_, const std::string& nume_, std::vector<std::shared_ptr<Grid>> g);
+    Player(const std::string& nume_, std::vector<std::shared_ptr<Grid>> g);
     void adauga_grid(const Grid &gr);
     //constructor de copiere
     Player(const Player& other);

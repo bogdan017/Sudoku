@@ -144,6 +144,7 @@ protected:
     std::array<std::array<int, 9>, 9> grid;
     int lines, cols;
 
+
 private:
     virtual int NumInRow_(int r_, int num_) const = 0;
     virtual int NumInCol_(int c_, int num_) const = 0;

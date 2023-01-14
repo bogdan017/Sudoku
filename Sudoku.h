@@ -10,17 +10,19 @@
 
 
 class Sudoku {
-    int id_game;
+    static int id;
+    const int id_game;
     std::vector<Player> players;
 public:
     //constructor
-    explicit Sudoku(int id_game_);
+    explicit Sudoku();
     /*int GetId() const {
         return id_game;
     }*/
     void adaugaJucator(const Player &p);
     //operator<<
     friend std::ostream& operator<<(std::ostream & os, const Sudoku &s);
+
 };
 
 
