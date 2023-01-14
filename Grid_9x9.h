@@ -19,7 +19,7 @@ private:
     int findEmpty_(int &r, int &c) const override;
     int ok_(int r_, int c_, int num_) const override;
     int solve_() override;
-    const int lines = 9, cols = 9;
+    const int lines9 = 9, cols9 = 9;
 };
 
 

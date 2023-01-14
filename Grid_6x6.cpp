@@ -4,8 +4,8 @@ std::shared_ptr<Grid> Grid_6x6::clone() const { return std::make_shared<Grid_6x6
 
 
 void Grid_6x6::initializeGrid() {
-    for(int i = 0; i < lines; i++){
-        for (int j = 0; j < cols; ++j) {
+    for(int i = 0; i < lines6; i++){
+        for (int j = 0; j < cols6; ++j) {
             grid[i][j] = 0;
         }
     }
@@ -33,7 +33,7 @@ void Grid_6x6::initializeGrid() {
 
 
 int Grid_6x6::NumInRow_(int r_, int num_) const {
-    for (int i = 0; i < lines; ++i) {
+    for (int i = 0; i < lines6; ++i) {
         if (num_ != 0 && grid[r_][i] == num_) {
             return 1;
         }
@@ -42,7 +42,7 @@ int Grid_6x6::NumInRow_(int r_, int num_) const {
 }
 
 int Grid_6x6::NumInCol_(int c_, int num_) const {
-    for (int i = 0; i < cols; ++i) {
+    for (int i = 0; i < cols6; ++i) {
         if (num_ != 0 && grid[i][c_] == num_) {
             return 1;
         }
@@ -62,8 +62,8 @@ int Grid_6x6::NumInSquare_(int ls_, int cs_, int num_) const {
 }
 
 int Grid_6x6::findEmpty_(int &r, int &c) const {
-    for (r = 0; r < lines; ++r) {
-        for (c = 0; c < cols; ++c) {
+    for (r = 0; r < lines6; ++r) {
+        for (c = 0; c < cols6; ++c) {
             if (grid[r][c] == 0) {
                 return 1;
             }

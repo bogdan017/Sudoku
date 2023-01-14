@@ -3,8 +3,8 @@
 std::shared_ptr<Grid> Grid_9x9::clone() const { return std::make_shared<Grid_9x9>(*this); }
 
 void Grid_9x9::initializeGrid_() {
-    for(int i = 0; i < lines; i++){
-        for (int j = 0; j < cols; ++j) {
+    for(int i = 0; i < lines9; i++){
+        for (int j = 0; j < cols9; ++j) {
             grid[i][j] = 0;
         }
     }

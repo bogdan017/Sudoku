@@ -15,7 +15,7 @@ private:
     int findEmpty_(int &r, int &c) const override;
     int ok_(int r_, int c_, int num_) const override;
     int solve_() override;
-    const int lines = 6, cols = 6;
+    const int lines6 = 6, cols6 = 6;
 };
 
 
