@@ -19,7 +19,7 @@ public:
     /*int GetId() const {
         return id_game;
     }*/
-    Sudoku(std::vector<std::shared_ptr<Player>> &players) : id_game(id++), players(players) {}
+    explicit Sudoku(std::vector<std::shared_ptr<Player>> &players) : id_game(id++), players(players) {}
     //void adaugaJucator(Player &p);
     //operator<<
     friend std::ostream& operator<<(std::ostream &os, const Sudoku &s);
