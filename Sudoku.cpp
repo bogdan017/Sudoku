@@ -17,18 +17,38 @@ Sudoku::Sudoku() : id_game(id++) {
     std::cout << "Constructor initializare joc\n";
 }
 
+
+int Sudoku::id = 1;
+
+
+std::istream &operator>>(std::istream &is, Sudoku &s) {
+    s.citire(is);
+    return is;
+}
+
+std::istream &Sudoku::citire(std::istream &is) {
+    std::cout << "Numar game-uri sudoku player: ";
+    int nrGames;
+    is >> nrGames;
+    for (int i = 0; i < nrGames; ++i) {
+        std::shared_ptr<Player> tmpPlayer = std::make_shared<Player>();
+        tmpPlayer->citire(is);
+        players.push_back(tmpPlayer);
+    }
+    return is;
+}
+
 std::ostream &operator<<(std::ostream &os, const Sudoku &s) {
-    os << "sudoku game no." << s.id_game;
+    s.afisare(os);
+    return os;
+}
+
+std::ostream &Sudoku::afisare(std::ostream &os) const {
+    os << "sudoku game no." << id_game;
     os << "\n";
-    for (const auto &Player: s.players) {
-        os << Player;
+    for (auto &Player: players) {
+        os << *Player;
         os << "\n";
     }
     return os;
 }
-
-void Sudoku::adaugaJucator(const Player &p) {
-    players.push_back(p);
-}
-
-int Sudoku::id = 1;

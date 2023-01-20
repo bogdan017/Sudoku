@@ -1,25 +1,29 @@
 #include "Grid.h"
 
-int Grid::solve() { return solve_(); }
 
 std::ostream &operator<<(std::ostream &os, const Grid &g) {
-    for (int i = 0; i < g.lines; ++i) {
-        for (int j = 0; j < g.cols; ++j) {
-            os << g.grid[i][j] << " ";
-        }
-        os << "\n";
-    }
-    //g.afisare(os);
+    g.afisare(os);
     return os;
 }
 
-Grid::Grid() {
-    this->lines = 0;
-    this->cols = 0;
+Grid::Grid() {}
+
+std::ostream & Grid::afisare(std::ostream &os) const {
+    for (int i = 0; i < lines; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            os << grid[i][j] << " ";
+        }
+        os << "\n";
+    }
+    return os;
 }
 
-Grid::Grid(const int lines, const int cols) {
-    this->lines = lines;
-    this->cols = cols;
-
+std::istream &operator>>(std::istream &is, Grid &g) {
+    g.citire(is);
+    return is;
 }
+
+std::istream &Grid::citire(std::istream &is) {
+    return is;
+}
+

@@ -1,28 +1,8 @@
 #include "Player.h"
 #include "Grid.h"
 
-Player::Player(const std::string &nume_, std::vector<std::shared_ptr<Grid>> g) : id_PlayerCur(idPlayer++), nume{nume_}, g{std::move(g)} {
+Player::Player(const std::string &nume, const std::vector<std::shared_ptr<Grid>> &g) : id_PlayerCur(idPlayer++), nume(nume), g(g) {
     std::cout << "Constructor initializare jucator\n";
-}
-
-Player::Player(const Player &other) : id_PlayerCur(idPlayer), nume{other.nume} {
-    for (const auto &Grid: other.g)
-        g.emplace_back(Grid->clone());
-    std::cout << "Constructor de copiere jucator\n";
-}
-
-/*int Player::GetNumber() const {
-    return number;
-}
-
-std::string Player::GetNume() const {
-    return nume;
-}
-*/
-Player &Player::operator=(const Player &other) {
-    nume = other.nume;
-    std::cout << "Op= copiere Player\n";
-    return *this;
 }
 
 Player &Player::operator=(Player other) {
@@ -35,30 +15,63 @@ void swap(Player &st1, Player &st2) {
     std::swap(st1.nume, st2.nume);
 }
 
-std::ostream &operator<<(std::ostream &os, const Player &p) {
-    os << "Player no." << p.id_PlayerCur << "\n" << "Nume player: " <<  p.nume << "\n";
-    os << "Jocuri player: " << "\n";
-    for (const auto &Grid: p.g){
-        os << *Grid;
-        os << "\n";
+Player::~Player() {
+    std::cout << "Destructor player\n";
+}
+
+int Player::idPlayer = 0;
+
+Player::Player() : id_PlayerCur(++idPlayer) {}
+
+
+std::istream &operator>>(std::istream &is, Player &player) {
+    player.citire(is);
+    return is;
+}
+
+std::istream &Player::citire(std::istream &is) {
+    std::cout << "Nume jucator:";
+    is >> nume;
+    std::cout << "Numarul de jocuri:";
+    int nrGames;
+    is >> nrGames;
+    for (int i = 0; i < nrGames; ++i) {
+        int opt, citireValida = 0;
+        std::shared_ptr<Grid> tmpGrid;
+        while(!citireValida) {
+            std::cout << "Alegeti optiunea: 1.Grid_6x6, 2.Grid_9x9: ";
+            std::cin >> opt;
+            citireValida = 1;
+            if(opt == 1) {
+                tmpGrid = std::make_shared<Grid_6x6>();
+            } else if(opt == 2) {
+                tmpGrid = std::make_shared<Grid_9x9>();
+            }
+            tmpGrid->citire(std::cin);
+            g.push_back(tmpGrid);
+        }
     }
+    return is;
+}
+
+std::ostream &operator<<(std::ostream &os, const Player &p) {
+    p.afisare(os);
+    return os;
+}
+
+std::ostream &Player::afisare(std::ostream &os) const {
+    os << "Player no." << id_PlayerCur << "\n" << "Nume player: " <<  nume << "\n";
+    os << "Jocuri player: " << "\n";
     os << "\n";
     os << "Jocuri rezolvate player: " << "\n";
-    for (const auto &Grid: p.g) {
+    for (const auto &Grid: g) {
+        os << "\nJocul initial:\n";
+        os << *Grid;
         (*Grid).solve();
+        os << "\nJocul dupa rezolvare:\n";
         os << *Grid;
         os << "\n";
     }
     os << "\n";
     return os;
 }
-
-Player::~Player() {
-    std::cout << "Destructor player\n";
-}
-
-void Player::adauga_grid(const Grid &gr) {
-    g.push_back(gr.clone());
-}
-
-int Player::idPlayer = 0;

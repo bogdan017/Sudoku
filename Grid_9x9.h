@@ -11,7 +11,9 @@
 class Grid_9x9 : public Grid {
 public:
     void initializeGrid_();
-    std::shared_ptr<Grid> clone() const override;
+    //std::shared_ptr<Grid> clone() override;
+    Grid_9x9();
+    std::istream &citire(std::istream &is) override;
 private:
     int NumInRow_(int r_, int num_) const override;
     int NumInCol_(int c_, int num_) const override;
@@ -19,7 +21,7 @@ private:
     int findEmpty_(int &r, int &c) const override;
     int ok_(int r_, int c_, int num_) const override;
     int solve_() override;
-    const int lines9 = 9, cols9 = 9;
+    std::ostream &afisare(std::ostream &os) const override;
 };
 
 

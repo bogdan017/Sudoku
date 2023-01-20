@@ -41,7 +41,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp Player.cpp Player.h Grid.cpp Grid.h Grid_9x9.cpp Grid_9x9.h Grid_6x6.cpp Grid_6x6.h Sudoku.cpp Sudoku.h exceptions.cpp exceptions.h)
+add_executable(${PROJECT_NAME} main.cpp Player.cpp Player.h Grid.cpp Grid.h Grid_9x9.cpp Grid_9x9.h Grid_6x6.cpp Grid_6x6.h Sudoku.cpp Sudoku.h exceptions.cpp exceptions.h Meniu.cpp Meniu.h)
 
 ###############################################################################
 
@@ -94,7 +94,7 @@ elseif(UNIX)
     if("${CMAKE_CXX_COMPILER_ID}" MATCHES "GNU")
         # we cannot mix sanitizers with Valgrind
     elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
-        if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "14.")
+        if("${CMAKE_CXX_COMPILER_VERSION}" MATCHES "12.")
             # check leaks on Linux since macOS does not support the leaks sanitizer yet
             # leaks sanitizer is enabled by default on Linux, so we do not need to enable it explicitly
             target_compile_options(${PROJECT_NAME} PRIVATE "$<${debug_mode}:-fsanitize=address,undefined>")
