@@ -16,14 +16,13 @@
 
 class Meniu {
 private:
-    Meniu() = default;
     static Meniu *meniu;
     int optiune;
     std::vector<std::shared_ptr<Player>> players;
     std::vector<std::shared_ptr<Sudoku>> sudoku;
     void arataOptiuni();
 public:
-    Meniu(int optiune);
+    explicit Meniu(int optiune);
     static Meniu *getMeniu();
     void afisareSudoku();
     void adaugareSudoku();
