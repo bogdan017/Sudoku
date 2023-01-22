@@ -16,6 +16,7 @@
 
 class Meniu {
 private:
+    Meniu() {}
     static Meniu *meniu;
     int optiune;
     std::vector<std::shared_ptr<Player>> players;
