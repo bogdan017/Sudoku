@@ -27,7 +27,7 @@ void Meniu::afisareSudoku() {
     if(sudoku.empty()) {
         std::cout << "Player-ul nu are atribuit niciun sudoku\n";
     }
-    for (auto &game : sudoku) {
+    for (const auto &game : sudoku) {
         std::cout << *game;
     }
 }
@@ -82,5 +82,6 @@ void Meniu::showMenu()  {
     }
 }
 
+Meniu::Meniu(int optiune) : optiune(optiune) {}
 
 Meniu *Meniu::meniu;

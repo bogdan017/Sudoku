@@ -23,6 +23,7 @@ private:
     std::vector<std::shared_ptr<Sudoku>> sudoku;
     void arataOptiuni();
 public:
+    Meniu(int optiune);
     static Meniu *getMeniu();
     void afisareSudoku();
     void adaugareSudoku();
