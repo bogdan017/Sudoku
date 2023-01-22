@@ -1,5 +1,12 @@
 #include "Player.h"
+
+#include <utility>
 #include "Grid.h"
+
+
+int Player::idPlayer = 1;
+
+Player::Player() : id_PlayerCur(idPlayer++) {}
 
 Player::Player(const std::string &nume, const std::vector<std::shared_ptr<Grid>> &g) : id_PlayerCur(idPlayer++), nume(nume), g(g) {
     std::cout << "Constructor initializare jucator\n";
@@ -18,11 +25,6 @@ void swap(Player &st1, Player &st2) {
 Player::~Player() {
     std::cout << "Destructor player\n";
 }
-
-int Player::idPlayer = 0;
-
-Player::Player() : id_PlayerCur(++idPlayer) {}
-
 
 std::istream &operator>>(std::istream &is, Player &player) {
     player.citire(is);
@@ -61,9 +63,8 @@ std::ostream &operator<<(std::ostream &os, const Player &p) {
 
 std::ostream &Player::afisare(std::ostream &os) const {
     os << "Player no." << id_PlayerCur << "\n" << "Nume player: " <<  nume << "\n";
-    os << "Jocuri player: " << "\n";
+    os << "Jocuri player: ";
     os << "\n";
-    os << "Jocuri rezolvate player: " << "\n";
     for (const auto &Grid: g) {
         os << "\nJocul initial:\n";
         os << *Grid;
@@ -75,3 +76,8 @@ std::ostream &Player::afisare(std::ostream &os) const {
     os << "\n";
     return os;
 }
+
+const std::vector<std::shared_ptr<Grid>> &Player::getGame() const {
+    return g;
+}
+

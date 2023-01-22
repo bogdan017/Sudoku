@@ -8,38 +8,26 @@
 #include <iostream>
 #include <vector>
 #include <array>
+#include "Grid_6x6.h"
+#include "Player.h"
+#include "Grid_9x9.h"
+#include "Grid.h"
 #include "Sudoku.h"
 
 class Meniu {
 private:
-    Meniu() {}
+    Meniu() = default;
     static Meniu *meniu;
+    int optiune;
+    std::vector<std::shared_ptr<Player>> players;
     std::vector<std::shared_ptr<Sudoku>> sudoku;
-    unsigned int optiune;
     void arataOptiuni();
 public:
     static Meniu *getMeniu();
     void afisareSudoku();
     void adaugareSudoku();
-    void arataMeniu() {
-        std::cout << "Introduceti o optiune din meniul de mai jos:\n";
-        arataOptiuni();
-
-        std::cout << "Optiune:";
-        std::cin >> optiune;
-        while (optiune) {
-            if(optiune == 1) {
-                afisareSudoku();
-            } else if (optiune == 2) {
-                adaugareSudoku();
-            } else {
-                std::cout << "Optiunea introdusa este invalida";
-            }
-            arataOptiuni();
-            std::cout << "Optiune:";
-            std::cin >> optiune;
-        }
-    }
+    void leaderboard();
+    void showMenu();
 };
 
 

@@ -6,7 +6,10 @@ std::ostream &operator<<(std::ostream &os, const Grid &g) {
     return os;
 }
 
-Grid::Grid() {}
+Grid::Grid() {
+    Grid::lines = 9;
+    Grid::cols = 9;
+}
 
 std::ostream & Grid::afisare(std::ostream &os) const {
     for (int i = 0; i < lines; ++i) {

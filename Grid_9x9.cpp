@@ -13,12 +13,6 @@ Grid_9x9::Grid_9x9() {
     }
 }
 
-
-void Grid_9x9::initializeGrid_() {
-
-}
-
-
 int Grid_9x9::NumInRow_(int r_, int num_) const {
     for (int i = 0; i < lines; ++i) {
         if (num_ != 0 && grid[r_][i] == num_) {
@@ -101,25 +95,29 @@ std::ostream &Grid_9x9::afisare(std::ostream &os) const {
 }
 
 std::istream &Grid_9x9::citire(std::istream &is) {
-    int r, c, val;
-    char ch = 'y';
-    std::cout << "Initializare Sudoku 9x9:\n";
-    while (ch == 'y') {
-        std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
-        is >> r;
-        is >> c;
-        is >> val;
-        if (r < 0 || r > 8) {
-            throw(eroare_sudoku(r, c, val));
-        } else if (c < 0 || c > 8) {
-            throw(eroare_sudoku(r, c, val));
-        } else if (val < 1 || val > 9) {
-            throw(eroare_sudoku(r, c, val));
-        } else {
-            grid[r][c] = val;
+    try {
+        int r, c, val;
+        char ch = 'y';
+        std::cout << "Initializare Sudoku 9x9:\n";
+        while (ch == 'y') {
+            std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+            is >> r;
+            is >> c;
+            is >> val;
+            if (r < 0 || r > 8) {
+                throw (eroare_sudoku(r, c, val));
+            } else if (c < 0 || c > 8) {
+                throw (eroare_sudoku(r, c, val));
+            } else if (val < 1 || val > 9) {
+                throw (eroare_sudoku(r, c, val));
+            } else {
+                grid[r][c] = val;
+            }
+            std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
+            is >> ch;
         }
-        std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
-        is >> ch;
+    } catch(eroare_sudoku &err) {
+        std::cout<<err.what()<<std::endl;
     }
     return is;
 }

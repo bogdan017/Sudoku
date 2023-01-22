@@ -86,25 +86,29 @@ int Grid_6x6::solve_() {
 }
 
 std::istream &Grid_6x6::citire(std::istream &is) {
-    int r, c, val;
-    char ch = 'y';
-    std::cout << "Initializare sudoku 6x6\n";
-    while (ch == 'y') {
-        std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
-        is >> r;
-        is >> c;
-        is >> val;
-        if (r < 0 || r > 5) {
-            throw(eroare_sudoku(r, c, val));
-        } else if (c < 0 || c > 5) {
-            throw(eroare_sudoku(r, c, val));
-        } else if (val < 1 || val > 6) {
-            throw(eroare_sudoku(r, c, val));
-        } else {
-            grid[r][c] = val;
+    try {
+        int r, c, val;
+        char ch = 'y';
+        std::cout << "Initializare sudoku 6x6\n";
+        while (ch == 'y') {
+            std::cout << "Introduceti linia, coloana si valoarea corespunzatoare celulei alese: \n";
+            is >> r;
+            is >> c;
+            is >> val;
+            if (r < 0 || r > 5) {
+                throw (eroare_sudoku(r, c, val));
+            } else if (c < 0 || c > 5) {
+                throw (eroare_sudoku(r, c, val));
+            } else if (val < 1 || val > 6) {
+                throw (eroare_sudoku(r, c, val));
+            } else {
+                grid[r][c] = val;
+            }
+            std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
+            is >> ch;
         }
-        std::cout << "Mai poti introduce o valoare sau apasa n pentru a te opri: \n";
-        is >> ch;
+    } catch(eroare_sudoku &err) {
+        std::cout<<err.what()<<std::endl;
     }
     return is;
 }

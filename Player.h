@@ -11,13 +11,14 @@
 class Player {
 private:
     static int idPlayer;
-    const int id_PlayerCur;
+    int id_PlayerCur;
     std::string nume;
     std::vector<std::shared_ptr<Grid>> g;
+
 public:
     //constructor
     Player();
-    Player(const std::string& nume, const std::vector<std::shared_ptr<Grid>> &g);
+    Player(const std::string &nume, const std::vector<std::shared_ptr<Grid>> &g);
 
     Player &operator=(Player other);
     friend void swap(Player &st1, Player &st2);
@@ -26,6 +27,7 @@ public:
     friend std::istream &operator>>(std::istream &is, Player &player);
     std::istream &citire(std::istream &is);
     std::ostream &afisare(std::ostream &os) const;
+    const std::vector<std::shared_ptr<Grid>> &getGame() const;
     //destructor
     ~Player();
 };

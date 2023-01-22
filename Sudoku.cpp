@@ -27,14 +27,10 @@ std::istream &operator>>(std::istream &is, Sudoku &s) {
 }
 
 std::istream &Sudoku::citire(std::istream &is) {
-    std::cout << "Numar game-uri sudoku player: ";
-    int nrGames;
-    is >> nrGames;
-    for (int i = 0; i < nrGames; ++i) {
-        std::shared_ptr<Player> tmpPlayer = std::make_shared<Player>();
-        tmpPlayer->citire(is);
-        players.push_back(tmpPlayer);
-    }
+
+    std::shared_ptr<Player> tmpPlayer = std::make_shared<Player>();
+    tmpPlayer->citire(is);
+    players.push_back(tmpPlayer);
     return is;
 }
 
@@ -44,11 +40,14 @@ std::ostream &operator<<(std::ostream &os, const Sudoku &s) {
 }
 
 std::ostream &Sudoku::afisare(std::ostream &os) const {
-    os << "sudoku game no." << id_game;
+    os << "Sudoku game no." << id_game;
     os << "\n";
-    for (auto &Player: players) {
+    for (const auto &Player: players) {
         os << *Player;
         os << "\n";
     }
     return os;
 }
+
+Sudoku::Sudoku(const std::vector<std::shared_ptr<Player>> &players) : id_game(id++), players(players) {}
+

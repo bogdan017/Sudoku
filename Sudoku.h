@@ -13,18 +13,26 @@ class Sudoku {
     static int id;
     const int id_game;
     std::vector<std::shared_ptr<Player>> players;
+    std::shared_ptr<Grid> g;
+
 public:
+
     //constructor
     explicit Sudoku();
+
     /*int GetId() const {
         return id_game;
     }*/
-    explicit Sudoku(std::vector<std::shared_ptr<Player>> &players) : id_game(id++), players(players) {}
+    explicit Sudoku(const std::vector<std::shared_ptr<Player>> &players);
+
     //void adaugaJucator(Player &p);
     //operator<<
-    friend std::ostream& operator<<(std::ostream &os, const Sudoku &s);
-    friend std::istream& operator>>(std::istream &is, Sudoku &s);
+    friend std::ostream &operator<<(std::ostream &os, const Sudoku &s);
+
+    friend std::istream &operator>>(std::istream &is, Sudoku &s);
+
     std::ostream &afisare(std::ostream &os) const;
+
     std::istream &citire(std::istream &is);
 
 };

@@ -10,7 +10,6 @@
 
 class Grid_9x9 : public Grid {
 public:
-    void initializeGrid_();
     //std::shared_ptr<Grid> clone() override;
     Grid_9x9();
     std::istream &citire(std::istream &is) override;
