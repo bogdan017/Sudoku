@@ -63,13 +63,11 @@ void Meniu::leaderboard() {
     std::cout << " dintre care " << frqGrid[0] << " sunt/este sudoku 6x6";
     std::cout << " iar " << frqGrid[1] << " sunt/este sudoku 9x9\n";
 
-    std::string premiu;
     if(nrGrid >= 2) {
         std::cout << "Daca playerul are cel putin doua jocuri rezolvate acesta va primi un premiu:\n";
         std::shared_ptr<Premiu> tmpPrize = std::make_shared<Premiu>();
         tmpPrize->citire(std::cin);
-        premiu = tmpPrize->getType();
-        std::cout << "Acesta a castigat un premiu, care este sub forma: " << premiu << "\n";
+        std::cout << "Acesta a castigat un premiu, care este sub forma: " << tmpPrize->getType() << "\n";
     }
 }
 
