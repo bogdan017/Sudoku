@@ -14,7 +14,6 @@ public:
     virtual ~Grid() = default;
    // virtual std::shared_ptr<Grid> clone() = 0;
     Grid();
-    //void initializeGrid() {}
     int NumInRow(int r, int num) const { return NumInRow_(r, num); };
     int NumInCol(int c, int num) const { return NumInCol_(c, num); };
     int NumInSquare(int ls, int cs, int num) const { return NumInSquare_(ls, cs, num); };

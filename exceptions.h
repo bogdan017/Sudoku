@@ -11,11 +11,10 @@ public:
     explicit eroare_sudoku(int r, int c, int val);
 };
 
-class eroare_joc: public eroare_aplicatie{
+class eroare_jucator: public eroare_aplicatie{
 public:
-    explicit eroare_joc(int no);
+    explicit eroare_jucator(int no);
 };
-
 
 
 #endif //MAIN_CPP_EXCEPTIONS_H

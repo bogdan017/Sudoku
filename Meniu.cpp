@@ -7,11 +7,11 @@
 #include "Player.h"
 #include "Grid_9x9.h"
 #include "Grid.h"
-#include "Sudoku.h"
+#include "Premiu.h"
 
 void Meniu::arataOptiuni() {
-    std::cout << "1. Afisare sudoku\n";
-    std::cout << "2. Adaugarea sudoku\n";
+    std::cout << "1. Afisare player\n";
+    std::cout << "2. Adaugare player\n";
     std::cout << "3. Leaderboard\n";
     std::cout << "0. Iesire\n";
 }
@@ -23,28 +23,33 @@ Meniu *Meniu::getMeniu() {
     return meniu;
 }
 
-void Meniu::afisareSudoku() {
-    if(sudoku.empty()) {
-        std::cout << "Player-ul nu are atribuit niciun sudoku\n";
+void Meniu::afisarePlayer() {
+    if(players.empty()) {
+        std::cout << "Player-ul nu are atribuit niciun game atribuit\n";
     }
-    for (const auto &game : sudoku) {
-        std::cout << *game;
+    for (const auto &grid : players) {
+        std::cout << *grid;
     }
 }
 
-void Meniu::adaugareSudoku() {
-    std::shared_ptr<Player> tmpSudoku = std::make_shared<Player>();
-    tmpSudoku->citire(std::cin);
-    players.push_back(tmpSudoku);
+void Meniu::adaugarePlayer() {
+    std::shared_ptr<Player> tmpPlayer = std::make_shared<Player>();
+    tmpPlayer->citire(std::cin);
+    players.push_back(tmpPlayer);
 }
-
 
 void Meniu::leaderboard() {
-    // afisareSudoku();
-    std::cout << "Introduceti numarul player-ului pentru care doriti afisarea leaderboard-ului:";
+    std::cout << "Introduceti numarul player-ului pentru care doriti afisarea leaderboard-ului(primul player are numarul 0, al doilea player are numarul 1, etc.):";
     int option;
-    std::cin >> option;
-    int frqGrid[2] = {0,0};
+    try {
+        std::cin >> option;
+        if(option >= 2) {
+            throw eroare_jucator(option);
+        }
+    } catch(eroare_jucator &err) {
+        std::cout<<err.what()<<std::endl;
+    }
+    int frqGrid[3] = {0,0};
 
     for (const auto &player:players[option]->getGame()) {
         if (dynamic_pointer_cast<Grid_6x6>(player)) {
@@ -54,23 +59,32 @@ void Meniu::leaderboard() {
         }
     }
     int nrGrid = players[option]->getGame().size();
-    std::cout << "Playerul " << option << ", a jucat "<< nrGrid << " jocuri,";
+    std::cout << "Playerul " << players[option]->getNume() << ", a jucat "<< nrGrid << " jocuri,";
     std::cout << " dintre care " << frqGrid[0] << " sunt/este sudoku 6x6";
     std::cout << " iar " << frqGrid[1] << " sunt/este sudoku 9x9\n";
+
+    std::string premiu;
+    if(nrGrid >= 2) {
+        std::cout << "Daca playerul are cel putin doua jocuri rezolvate acesta va primi un premiu:\n";
+        std::shared_ptr<Premiu> tmpPrize = std::make_shared<Premiu>();
+        tmpPrize->citire(std::cin);
+        premiu = tmpPrize->getType();
+        std::cout << "Acesta a castigat un premiu, care este sub forma: " << premiu << "\n";
+    }
 }
 
 
 void Meniu::showMenu()  {
     std::cout << "Introduceti o optiune din meniul de mai jos:\n";
     arataOptiuni();
-
+    int optiune;
     std::cout << "Optiune:";
     std::cin >> optiune;
     while (optiune) {
         if(optiune == 1) {
-            afisareSudoku();
+            afisarePlayer();
         } else if (optiune == 2) {
-            adaugareSudoku();
+            adaugarePlayer();
         } else if (optiune == 3) {
             leaderboard();
         } else {
@@ -81,7 +95,5 @@ void Meniu::showMenu()  {
         std::cin >> optiune;
     }
 }
-
-Meniu::Meniu(int optiune) : optiune(optiune) {}
 
 Meniu *Meniu::meniu;

@@ -29,6 +29,7 @@ public:
     std::ostream &afisare(std::ostream &os) const;
     const std::vector<std::shared_ptr<Grid>> &getGame() const;
     //destructor
+    const std::string &getNume() const;
     ~Player();
 };
 

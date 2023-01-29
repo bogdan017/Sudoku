@@ -44,13 +44,18 @@ std::istream &Player::citire(std::istream &is) {
             std::cout << "Alegeti optiunea: 1.Grid_6x6, 2.Grid_9x9: ";
             std::cin >> opt;
             citireValida = 1;
-            if(opt == 1) {
-                tmpGrid = std::make_shared<Grid_6x6>();
-            } else if(opt == 2) {
-                tmpGrid = std::make_shared<Grid_9x9>();
+            try {
+                if (opt == 1) {
+                    tmpGrid = std::make_shared<Grid_6x6>();
+                } else if (opt == 2) {
+                    tmpGrid = std::make_shared<Grid_9x9>();
+                } else throw opt;
+                tmpGrid->citire(std::cin);
+                g.push_back(tmpGrid);
+            } catch (...) {
+                std::cout << "Optiunea nu este valida! Reincercati\n";
+                citireValida = 0;
             }
-            tmpGrid->citire(std::cin);
-            g.push_back(tmpGrid);
         }
     }
     return is;
@@ -79,5 +84,9 @@ std::ostream &Player::afisare(std::ostream &os) const {
 
 const std::vector<std::shared_ptr<Grid>> &Player::getGame() const {
     return g;
+}
+
+const std::string &Player::getNume() const {
+    return nume;
 }
 
