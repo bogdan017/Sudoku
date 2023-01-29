@@ -34,5 +34,7 @@ std::ostream &Premiu::afisare(std::ostream &os) const {
     return os;
 }
 
+Premiu::Premiu() {}
+
 
 

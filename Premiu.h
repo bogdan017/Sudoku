@@ -15,6 +15,7 @@ class Premiu {
 public:
 
     //constructor
+    explicit Premiu();
     explicit Premiu(const std::string &tip);
     //operator<<
     friend std::ostream &operator<<(std::ostream &os, const Premiu &s);
