@@ -10,14 +10,11 @@
 
 
 class Premiu {
-    static int id;
-    const int id_premiu;
     std::string tip;
 
 public:
 
     //constructor
-    explicit Premiu();
     explicit Premiu(const std::string &tip);
     //operator<<
     friend std::ostream &operator<<(std::ostream &os, const Premiu &s);

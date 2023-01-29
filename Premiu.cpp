@@ -10,13 +10,7 @@
 #include "Grid_9x9.h"
 
 
-Premiu::Premiu() : id_premiu(id++) {
-}
-
-Premiu::Premiu(const std::string &tip) : id_premiu(++id), tip(tip) {}
-
-
-int Premiu::id = 1;
+Premiu::Premiu(const std::string &tip) : tip(tip) {}
 
 
 std::istream &operator>>(std::istream &is, Premiu &s) {
